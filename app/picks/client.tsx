@@ -1,6 +1,6 @@
  "use client";
 import {useState} from "react";
-import {supabase} from "@/lib/supabase";
+import {supabase} from "../../lib/supabase";
 
 export default function PicksClient({week,games}:{week:any,games:any[]}){
  const [values,setValues]=useState<any>({});
