@@ -13,7 +13,7 @@ export default function PicksClient({week,games}:{week:any,games:any[]}){
    const {data:{user}}=await supabase.auth.getUser();
    if(!user){setMessage("Please log in before submitting picks.");setSaving(false);return;}
    const picks=games.map(g=>({user_id:user.id,week_id:week.id,game_id:g.id,winner_team:values[g.id]?.winner,confidence:Number(values[g.id]?.confidence),spread_team:values[g.id]?.spread||null}));
-   if(picks.some(p=>!p.winner||![1,2,3,4].includes(p.confidence))){setMessage("Choose a winner and confidence number for every game.");setSaving(false);return;}
+   if(picks.some(p=>!p.winner_team||![1,2,3,4].includes(p.confidence))){setMessage("Choose a winner and confidence number for every game.");setSaving(false);return;}
    if(new Set(picks.map(p=>p.confidence)).size!==4){setMessage("Use confidence numbers 1, 2, 3 and 4 exactly once.");setSaving(false);return;}
    if(picks.filter(p=>p.spread_team).length!==2){setMessage("Choose exactly two point-spread games.");setSaving(false);return;}
    const {error}=await supabase.from("picks").upsert(picks,{onConflict:"user_id,week_id,game_id"});
