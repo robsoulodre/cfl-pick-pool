@@ -1,6 +1,6 @@
 {
   "framework":"nextjs",
   "crons":[
-    {"path":"/api/cfl-sync?season=2026","schedule":"0 */6 * * *"}
+    {"path":"/api/cfl-sync?season=2026","schedule": "0 6 * * *"}
   ]
 }
