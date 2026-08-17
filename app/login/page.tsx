@@ -1,5 +1,5 @@
  "use client";
-import {useState} from "react"; import {supabase} from "@/lib/supabase"; import {useRouter} from "next/navigation";
+import {useState} from "react"; import {supabase} from "../../lib/supabase"; import {useRouter} from "next/navigation";
 export default function Login(){const [email,setEmail]=useState(""),[password,setPassword]=useState(""),[mode,setMode]=useState("login"),[msg,setMsg]=useState("");const router=useRouter();
 async function go(){const r=mode==="login"?await supabase.auth.signInWithPassword({email,password}):await supabase.auth.signUp({email,password});setMsg(r.error?.message||"Success — check your email if confirmation is enabled.");if(!r.error)router.push("/");}
 return <main className="container narrow"><section className="card"><h1>{mode==="login"?"Log in":"Create account"}</h1><label>Email</label><input value={email} onChange={e=>setEmail(e.target.value)}/><label>Password</label><input type="password" value={password} onChange={e=>setPassword(e.target.value)}/><button className="primary" onClick={go}>{mode==="login"?"Log in":"Create account"}</button><button className="link" onClick={()=>setMode(mode==="login"?"signup":"login")}>{mode==="login"?"Need an account?":"Already have an account?"}</button>{msg&&<p>{msg}</p>}</section></main>}
