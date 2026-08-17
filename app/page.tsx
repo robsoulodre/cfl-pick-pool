@@ -1,2 +1,5 @@
-import Picks from "./picks";
-export default function Home(){ return <Picks/> }
+import { redirect } from "next/navigation";
+
+export default function Home() {
+  redirect("/picks");
+}
