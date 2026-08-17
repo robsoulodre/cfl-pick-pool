@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../lib/supabase";
 import PicksClient from "./client";
 
 export default async function Picks(){
