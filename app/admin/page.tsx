@@ -1,5 +1,5 @@
  "use client";
-import {useState} from "react"; import {supabase} from "@/lib/supabase";
+import {useState} from "react"; import {supabase} from "../../lib/supabase";
 export default function Admin(){const [week,setWeek]=useState(""),[season,setSeason]=useState("2026"),[deadline,setDeadline]=useState(""),[msg,setMsg]=useState("");
 async function create(){const {data,error}=await supabase.from("weeks").insert({season:Number(season),week_number:Number(week),deadline}).select().single();setMsg(error?.message||`Created week ${data.week_number}. Add games in Supabase or connect your approved CFL data provider.`)}
 return <main className="container narrow"><section className="card"><h1>Commissioner</h1><p className="muted">Only users promoted to commissioner can write here.</p><label>Season</label><input value={season} onChange={e=>setSeason(e.target.value)}/><label>Week</label><input value={week} onChange={e=>setWeek(e.target.value)}/><label>Deadline</label><input type="datetime-local" value={deadline} onChange={e=>setDeadline(e.target.value)}/><button className="primary" onClick={create}>Create Week</button><p>{msg}</p></section></main>}
