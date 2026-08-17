@@ -1,4 +1,4 @@
-import {supabase} from "@/lib/supabase";
+import {supabase} from "../../lib/supabase";
 export default async function Standings(){
  const {data}=await supabase.from("week_scores").select("*,profiles(display_name),weeks(week_number,season)").order("total_points",{ascending:false});
  const rows=data||[];
